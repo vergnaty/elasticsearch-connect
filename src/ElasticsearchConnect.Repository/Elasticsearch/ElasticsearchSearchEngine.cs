@@ -60,8 +60,7 @@ namespace ElasticsearchConnect.Repository
 
         public void DropIndex(string indexName)
         {
-            if (string.IsNullOrEmpty(indexName))
-                throw new ArgumentNullException(nameof(indexName));
+            if (string.IsNullOrEmpty(indexName)) throw new ArgumentNullException(nameof(indexName));
 
             if (string.IsNullOrEmpty(indexName)) throw new ArgumentNullException(nameof(IndexName));
             client.DeleteIndex(indexName);
@@ -69,6 +68,8 @@ namespace ElasticsearchConnect.Repository
 
         public SearchResult<TEntity> FullTextSearch(SearchQueryItem queryItem)
         {
+            if (queryItem == null) throw new ArgumentNullException(nameof(queryItem));
+
             int from = ((queryItem.Pagination.Page - 1) * queryItem.Pagination.PageSize);
 
             ElasticsearchQueryContainer<TEntity> query = ElasticsearchQueryBuilder<TEntity>.Create().Build(queryItem);

@@ -9,16 +9,14 @@ using ElasticsearchConnect.Api.Infrastructure;
 
 namespace ElasticsearchConnect.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [CustomExceptionFilter]
     public class SearchController : Controller
     {
         ISearchEngine<object> searchEngine;
         public SearchController(ISearchEngine<object> engine)
         {
-            if (engine == null)
-                throw new ArgumentNullException(nameof(engine));
-
+            if (engine == null) throw new ArgumentNullException(nameof(engine));
             this.searchEngine = engine;
         }
 
@@ -33,21 +31,52 @@ namespace ElasticsearchConnect.Api.Controllers
         public SearchResult<object> GetDefaultFilter(string indexName, string type, string appname)
         {
             SearchQueryItem query = new SearchQueryItem();
-            query.Filters = new List<CustomFilter>();
             query.Pagination = new PagingParameter() { Page = 1, PageSize = 1 };
             query.Filters.Add(new CustomFilter() { Name = "_id", Value = appname });
 
             return this.ExecuteSearch(indexName, type, query);
         }
 
+        [Route("save-many/{dataname}/{type}")]
+        [HttpPost]
+        public void SaveDocuments(string dataname, string type, [FromBody]object[] items)
+        {
+            searchEngine.SetIndexName(dataname)
+                         .SetType(type)
+                         .SaveMany(items);
+        }
+
+        [Route("save-csv/{dataname}/{type}")]
+        [HttpPost]
+        public void SaveCsv(string dataname, string type)
+        {
+            //save CSV
+        }
+
+        [Route("save-json/{dataname}/{type}")]
+        [HttpPost]
+        public void SaveJson(string dataname, string type)
+        {
+            //save JSON
+        }
+
+        [Route("save-xml/{dataname}/{type}")]
+        [HttpPost]
+        public void SaveXml(string dataname, string type)
+        {
+            //save XML
+        }
+
         [Route("fields/{dataname}/{type}")]
         public List<KeyValuePair<string, string>> GetFilterFields(string dataname, string type)
         {
-            searchEngine.SetIndexName(dataname);
-            searchEngine.SetType(type);
-            return searchEngine.GetFilterFields();
+          var result =  searchEngine.SetIndexName(dataname)
+                                    .SetType(type)
+                                    .GetFilterFields();
+            return result;
         }
 
+        #region private methods
         private SearchResult<object> ExecuteSearch(string indexName, string type, SearchQueryItem query)
         {
             var result = searchEngine.SetIndexName(indexName)
@@ -55,5 +84,6 @@ namespace ElasticsearchConnect.Api.Controllers
                                      .FullTextSearch(query);
             return result;
         }
+        #endregion
     }
 }

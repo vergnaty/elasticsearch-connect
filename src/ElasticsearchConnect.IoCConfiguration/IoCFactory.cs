@@ -30,7 +30,7 @@ namespace ElasticsearchConnect.Api.IoCConfiguration
             if (currentIocRegistration == null)
             {
                 GetIoCRegistration();
-                CommonIoCRegistration.Register();
+                CommonIoCRegistration.Register(currentIocRegistration);
             }
 
             if (currentContainer == null)

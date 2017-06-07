@@ -10,7 +10,7 @@ namespace ElasticsearchConnect.Model
         public string Fulltext { get; set; }
 
         /// <summary>
-        /// Get or Set the list or properties to be returned back as response
+        /// Get or Set the list or properties to be returned as response object
         /// </summary>
         public string[] Select{ get; set; }
       
@@ -28,5 +28,11 @@ namespace ElasticsearchConnect.Model
         /// Get or set the Pagination
         /// </summary>
         public PagingParameter Pagination { get; set; }
+
+        public SearchQueryItem()
+        {
+            this.Aggregations = new List<AggregationItem>();
+            this.Filters = new List<CustomFilter>();
+        }
     }
 }

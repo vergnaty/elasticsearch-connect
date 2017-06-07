@@ -9,10 +9,8 @@ namespace ElasticsearchConnect.Api.IoCConfigurator
 {
     public class CommonIoCRegistration
     {
-        public static void Register()
+        public static void Register(IIoCRegistration container)
         {
-            var container = IoCFactory.GetIoCRegistration();
-            
             string[] urls = new string[] { "http://localhost:9200" };
             container.Instance<ISearchEngine<object>, ElasticsearchSearchEngine<object>>(new ElasticsearchSearchEngine<object>(urls));
         }
