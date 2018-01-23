@@ -1,8 +1,0 @@
-C:\Projects\Github\ElasticConnector\ElasticConnector\bin\Debug\netcoreapp2.0\ElasticConnector.deps.json
-C:\Projects\Github\ElasticConnector\ElasticConnector\bin\Debug\netcoreapp2.0\ElasticConnector.dll
-C:\Projects\Github\ElasticConnector\ElasticConnector\obj\Debug\netcoreapp2.0\ElasticConnector.csproj.CoreCompileInputs.cache
-C:\Projects\Github\ElasticConnector\ElasticConnector\obj\Debug\netcoreapp2.0\ElasticConnector.AssemblyInfoInputs.cache
-C:\Projects\Github\ElasticConnector\ElasticConnector\obj\Debug\netcoreapp2.0\ElasticConnector.AssemblyInfo.cs
-C:\Projects\Github\ElasticConnector\ElasticConnector\bin\Debug\netcoreapp2.0\ElasticConnector.pdb
-C:\Projects\Github\ElasticConnector\ElasticConnector\obj\Debug\netcoreapp2.0\ElasticConnector.dll
-C:\Projects\Github\ElasticConnector\ElasticConnector\obj\Debug\netcoreapp2.0\ElasticConnector.pdb
